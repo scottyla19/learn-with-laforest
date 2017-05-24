@@ -1,0 +1,13 @@
+{
+  "assignments" : {
+    "1495453441" : {
+      "title" : "pg 687: 3-33 odd",
+      "description" : "test",
+      "dateAssigned": 1495453441,
+      "dateDue": 1495457000,
+      "links":{
+        "google":"http://www.google.com"
+      }
+    }
+  }
+}
