@@ -27,6 +27,12 @@ function Assignment() {
   this.signOutButton = document.getElementById('sign-out');
   this.signInSnackbar = document.getElementById('must-signin-snackbar');
 
+  this.currentCourse = "Alg1";
+  document.getElementById('showAlg1').addEventListener('click', this.setCourse.bind(this, "Alg1"));
+  document.getElementById('showIED').addEventListener('click', this.setCourse.bind(this, "IED"));
+  document.getElementById('showCEA').addEventListener('click', this.setCourse.bind(this, "CEA"));
+  document.getElementById('show3DDA').addEventListener('click', this.setCourse.bind(this, "3DDA"));
+
   this.signInButton.removeAttribute("hidden");
   this.signOutButton.addEventListener('click', this.signOut.bind(this));
   this.signInButton.addEventListener('click', this.signIn.bind(this));
@@ -34,7 +40,18 @@ function Assignment() {
 
   this.initFirebase();
 }
+Assignment.prototype.setCourse = function(course){
+  this.currentCourse = course;
+  this.clearAssignments();
+  this.loadMessages();
+}
 
+Assignment.prototype.clearAssignments = function(){
+  var myNode = document.getElementById("assignments");
+  while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+  }
+}
 // Sets up shortcuts to Firebase features and initiate firebase auth.
 Assignment.prototype.initFirebase = function() {
     this.auth = firebase.auth();
@@ -44,16 +61,11 @@ Assignment.prototype.initFirebase = function() {
     this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
   };
 
-
-
-
-// Signs-in Friendly Chat.
 Assignment.prototype.signIn = function() {
     var provider = new firebase.auth.GoogleAuthProvider();
     this.auth.signInWithPopup(provider);
   };
 
-// Signs-out of Friendly Chat.
 Assignment.prototype.signOut = function() {
   this.auth.signOut();
 };
@@ -64,7 +76,6 @@ Assignment.prototype.onAuthStateChanged = function(user) {
       // Get profile pic and user's name from the Firebase user object.
       var profilePicUrl = user.photoURL; // Only change these two lines!
       var userName = user.displayName;   // Only change these two lines!
-
     // Set the user's profile pic and name.
     this.userPic.style.backgroundImage = 'url(' + profilePicUrl + ')';
     this.userName.textContent = userName;
@@ -137,8 +148,23 @@ Assignment.prototype.checkSignedInWithMessage = function() {
 
 
 Assignment.prototype.loadMessages = function() {
+  var course =  "algebra1"
+  switch (this.currentCourse) {
+    case 'Alg1':
+      course = "algebra1";
+      break;
+    case 'IED':
+      course = "ied";
+      break;
+    case 'CEA':
+      course = "cea";
+      break;
+    case '3DDA':
+      course = "3dda";
+      break;
+  }
   // Reference to the /assignments/ database path.
-  this.messagesRef = this.database.ref('assignments');
+  this.messagesRef = this.database.ref(course+'/assignments');
   // Make sure we remove all previous listeners.
   this.messagesRef.off();
 
@@ -170,7 +196,6 @@ Assignment.ASSIGNMENT_TEMPLATE =
 
 Assignment.prototype.displayAssignment = function(key, title, desc, assigned, due, links) {
 
-  console.log("displayAssignment called");
   var div = document.getElementById(key);
 
   // If an element for that message does not exists yet we create it.
@@ -207,5 +232,5 @@ Assignment.prototype.convertTimestamp = function(timestamp){
 };
 window.onload = function() {
   window.assignment = new Assignment();
-  window.assignment.loadMessages();
+  // window.assignment.loadMessages();
 };
