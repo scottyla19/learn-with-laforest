@@ -9,3 +9,4 @@ This repository is my first attempt at a progressive web app. This app is my cla
  this.showAlg1 = document.getElementById('showAlg1')
  this.showAlg1.addEventListener('click', this.clickedOn.bind(this, "Alg1"));
  ```
+- Service-worker: Wanted to try making my own but could sw-precache and sw-toolbox work?
