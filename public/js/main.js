@@ -163,6 +163,8 @@ Assignment.prototype.loadMessages = function() {
       course = "3dda";
       break;
   }
+  var assignTitle = document.getElementById('assignmentsTitle');
+  assignTitle.textContent = this.currentCourse + ' Assignments';
   // Reference to the /assignments/ database path.
   this.messagesRef = this.database.ref(course+'/assignments');
   // Make sure we remove all previous listeners.
@@ -232,5 +234,5 @@ Assignment.prototype.convertTimestamp = function(timestamp){
 };
 window.onload = function() {
   window.assignment = new Assignment();
-  // window.assignment.loadMessages();
+  window.assignment.loadMessages();
 };

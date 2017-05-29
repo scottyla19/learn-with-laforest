@@ -67,7 +67,7 @@ body{
   justify-items: center;
   grid-area: headerLeft;
   justify-self: left;
-  color: #eed516;
+  color: #673AB7;
 }
 .headerMain h1{
   text-align: center;

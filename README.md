@@ -9,4 +9,9 @@ This repository is my first attempt at a progressive web app. This app is my cla
  this.showAlg1 = document.getElementById('showAlg1')
  this.showAlg1.addEventListener('click', this.clickedOn.bind(this, "Alg1"));
  ```
-- Service-worker: Wanted to try making my own but could sw-precache and sw-toolbox work?
+- Service-worker: CDNs at getmdl.io are not CORS supported. So I had to manually fetch them and then cache them thanks to the answer here by Jeff Posnick on [StackOverflow](https://stackoverflow.com/questions/39109789/what-limitations-apply-to-opaque-responses/39109790#39109790).
+Example
+```javascript
+const request = new Request('https://code.getmdl.io/1.3.0/material.deep_purple-yellow.min.css', {mode: 'no-cors'});
+fetch(request).then(response => cache.put(request, response));
+```
