@@ -14,7 +14,7 @@ body{
     " headerRight headerRight";
 
 }
-#assignments-card h4{
+.mdl-card h4{
   text-align: center;
 }
 #user-container{
@@ -109,6 +109,7 @@ background-color: #673AB7;
 .containerFooter a, .containerFooter a:visited{
   color: #eed516;
 }
+
 .containerMain{
     grid-area: mainContent;
 }
@@ -120,13 +121,17 @@ background-color: #673AB7;
   display: flex;
   flex-flow: row wrap;
   grid-area: footer;
+  align-items: center;
   background-color: #673AB7;
   color: #eed516;
+
 }
 .footerSection{
-text-align: center;
+  text-align: center;
   width: 100%;
   padding-bottom:10px;
+  padding-top: 10px;
+
 
 }
 #footerLeft{

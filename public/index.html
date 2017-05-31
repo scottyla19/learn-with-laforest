@@ -111,14 +111,31 @@
 
 
 <div class="containerMain">
-    <div id="assignments-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
-      <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-        <h4 id="assignmentsTitle"> Assignments</h4>
-        <div id="assignments">
-          <span id="assignment-filler"></span>
+  <div class="mdl-grid">
+      <div id="assignments-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+          <h4 id="assignmentsTitle"> Assignments</h4>
+          <div id="assignments">
+            <span id="assignment-filler"></span>
+          </div>
         </div>
       </div>
-    </div>
+      <div id="about-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+          <h4> About</h4>
+          <p> My name is Scott LaForest and I teach math, engineering, and 3D animation courses at Sentinel High School. This website
+            contains a list of assignments for all of the classes that I teach. To change the course assignments open the menu from
+            the top left menu icon to select your course.
+          </p>
+          <ul>
+            <li><h5> Algebra 1</h5></li>
+            <li><h5> Intro to Engineering Design (IED)</h5></li>
+            <li><h5> Civil Engineering and Architecture (CEA)</h5></li>
+            <li><h5> 3D Design and Animation (3DDA)</h5></li>
+          </ul>
+        </div>
+      </div>
+  </div>
 </div>
 
     <!-- <div class="containerSidebar">
@@ -174,7 +191,7 @@
   <script src="/__/firebase/init.js"></script>
 
   <script type="text/javascript" src="js/main.js"  defer></script>
-  <script>
+  <!-- <script>
   (function() {
     'use strict';
     if (!('serviceWorker' in navigator)) {
@@ -190,7 +207,7 @@
     });
 
   })();
-  </script>
+  </script> -->
 
 
 </body>

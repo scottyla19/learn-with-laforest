@@ -1,19 +1,3 @@
-
-
-// // my attempt at a slide in menu TODO: delete when happy with mdl replacement
-// $(window).click(function() {
-//   if($('.headerNav').is(':visible')  && $(window).width() < 1024){
-//     $(".headerNav").slideToggle();
-//   }
-// });
-// $(function()
-// {
-//      $(".barsToggle").click(function(){
-//         $(".headerNav").slideToggle();
-//          return false;
-//      });
-// });
-
 'use strict';
 // Initializes Assignment.
 function Assignment() {
@@ -170,14 +154,17 @@ Assignment.prototype.loadMessages = function() {
   // Make sure we remove all previous listeners.
   this.messagesRef.off();
 
+
   // Loads the last 12 messages and listen for new ones.
   var setMessage = function(data) {
     var val = data.val();
     this.displayAssignment( data.key, val.title, val.description, val.dateAssigned, val.dateDue, val.links);
   }.bind(this);
+
   this.messagesRef.limitToLast(12).on('child_added', setMessage);
   this.messagesRef.limitToLast(12).on('child_changed', setMessage);
 };
+
 
 // Template for messages.
 Assignment.ASSIGNMENT_TEMPLATE =
