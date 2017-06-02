@@ -76,7 +76,7 @@ Assignment.prototype.onAuthStateChanged = function(user) {
     this.loadMessages();
 
     // We save the Firebase Messaging Device token and enable notifications.
-    // this.saveMessagingDeviceToken();
+    this.saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
     this.userName.setAttribute('hidden', 'true');
@@ -103,32 +103,51 @@ Assignment.prototype.checkSignedInWithMessage = function() {
   return false;
 };
 
-// // Saves the messaging device token to the datastore.
-// Assignment.prototype.saveMessagingDeviceToken = function() {
-//   firebase.messaging().getToken().then(function(currentToken) {
-//     if (currentToken) {
-//       console.log('Got FCM device token:', currentToken);
-//       // Saving the Device Token to the datastore.
-//       firebase.database().ref('/fcmTokens').child(currentToken)
-//           .set(firebase.auth().currentUser.uid);
-//     } else {
-//       // Need to request permissions to show notifications.
-//       this.requestNotificationsPermissions();
-//     }
-//   }.bind(this)).catch(function(error){
-//     console.error('Unable to get messaging token.', error);
-//   });
-// };
-// // Requests permissions to show notifications.
-// Assignment.prototype.requestNotificationsPermissions = function() {
-//   console.log('Requesting notifications permission...');
-//   firebase.messaging().requestPermission().then(function() {
-//     // Notification permission granted.
-//     this.saveMessagingDeviceToken();
-//   }.bind(this)).catch(function(error) {
-//     console.error('Unable to get permission to notify.', error);
-//   });
-// };
+// Saves the messaging device token to the datastore.
+Assignment.prototype.saveMessagingDeviceToken = function() {
+  firebase.messaging().getToken().then(function(currentToken) {
+    if (currentToken) {
+      console.log('Got FCM device token:', currentToken);
+
+      //subscribe to current course
+      var http = new XMLHttpRequest();
+      // var url =  "https://iid.googleapis.com/iid/info/"+currentToken;
+      var url = "https://iid.googleapis.com/iid/v1/"+currentToken+"/rel/topics/"+this.currentCourse;
+      http.open("POST", url, true);
+
+      //Send the proper header information along with the request
+      http.setRequestHeader("Content-type", "application/json");
+      http.setRequestHeader("Authorization", "key=AAAA6NWjxIk:APA91bGbBAQg8yQi_v_ETe6CodXR-1WmhD_BBZ03SMHinKA13V9Uzcy8L3f_c2kNktT6sAkANU5TVdUEfM6Y6Rk-5sLOpcDLe9kb0Lfwkgp_qPpAEJGxCFpgQXJwHgVKTVnoSkKle0Vh");
+
+      http.onreadystatechange = function() {//Call a function when the state changes.
+        console.log(http.status);
+          if(http.readyState == 4 && http.status == 200) {
+              console.log(JSON.parse(http.responseText));
+          }
+      }
+      http.send();
+
+      // Saving the Device Token to the datastore.
+      firebase.database().ref('/fcmTokens').child(currentToken)
+          .set(firebase.auth().currentUser.uid);
+    } else {
+      // Need to request permissions to show notifications.
+      this.requestNotificationsPermissions();
+    }
+  }.bind(this)).catch(function(error){
+    console.error('Unable to get messaging token.', error);
+  });
+};
+// Requests permissions to show notifications.
+Assignment.prototype.requestNotificationsPermissions = function() {
+  console.log('Requesting notifications permission...');
+  firebase.messaging().requestPermission().then(function() {
+    // Notification permission granted.
+    this.saveMessagingDeviceToken();
+  }.bind(this)).catch(function(error) {
+    console.error('Unable to get permission to notify.', error);
+  });
+};
 
 
 Assignment.prototype.loadMessages = function() {

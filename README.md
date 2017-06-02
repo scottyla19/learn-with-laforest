@@ -15,4 +15,6 @@ Example
 const request = new Request('https://code.getmdl.io/1.3.0/material.deep_purple-yellow.min.css', {mode: 'no-cors'});
 fetch(request).then(response => cache.put(request, response));
 ```
-- Firebase DB- TIL that firebase saves data locally on all firebase clients [Firebase offline](https://firebase.google.com/docs/database/web/read-and-write#write_data_offline) . I was going to make a fetch then cache fetch event for the firebase databas url but this default functionality seems to work fine for offline. 
+- Firebase DB- TIL that firebase saves data locally on all firebase clients [Firebase offline](https://firebase.google.com/docs/database/web/read-and-write#write_data_offline) . I was going to make a fetch then cache fetch event for the firebase databas url but this default functionality seems to work fine for offline.
+
+- Struggling getting firebase messagine working with topics. First was using API key instead of SERVER_KEY which led to 401 responses. And also needed to prepend key= in the request header for the google iid api. Still receiving empty object for response on checking current topics.
