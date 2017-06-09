@@ -51,7 +51,8 @@
           <li class="mdl-menu__item" id="showAlg1"> Show Algebra 1</li>
           <li class="mdl-menu__item" id="showIED">Show IED</li>
           <li class="mdl-menu__item" id="showCEA">Show CEA</li>
-          <li class="mdl-menu__item" id="show3DDA">Show 3D Design</li>
+          <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" id="show3DDA">Show 3D Design</li>
+          <li class="mdl-menu__item" id="showAdmin" hidden ><a href="./admin.html">Admin</a></li>
 
         </ul>
 
@@ -77,39 +78,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="containerMain">
-      <ul class="demo-list-two mdl-list">
-  <li class="mdl-list__item mdl-list__item--two-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons mdl-list__item-avatar">assignment</i>
-      <span>Bryan Cranston</span>
-      <span class="mdl-list__item-sub-title">Assigned: </span>
-      <span class="mdl-list__item-sub-title">Due: </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <span class="mdl-list__item-secondary-info">Done?</span>
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
-          <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" checked />
-        </label>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--two-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons mdl-list__item-avatar">assignment</i>
-      <span>Aaron Paul</span>
-      <span class="mdl-list__item-sub-title">Assigned: </span>
-      <span class="mdl-list__item-sub-title">Due: </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">assignment_late</i></a>
-    </span>
-  </li>
-
-</ul>
-    </div> -->
-
-
 <div class="containerMain">
   <div class="mdl-grid">
       <div id="assignments-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
@@ -135,28 +103,11 @@
           </ul>
         </div>
       </div>
+
+
+      </div>
   </div>
 </div>
-
-    <!-- <div class="containerSidebar">
-      <div>
-        <h2>Projects List</h2>
-      </div>
-      <div>
-        <ul>
-          <li>Coming Soon </li>
-        </ul>
-      </div>
-    </div>
-    <div class="containerMain">
-      <div>
-        <h2>Projects</h2>
-      </div>
-      <div>
-          <p>Coming Soon </p>
-      </div>
-
-    </div> -->
     <div class="containerFooter">
       <div class="footerSection" id="footerLeft">
 
@@ -192,21 +143,21 @@
 
   <script type="text/javascript" src="js/main.js"  defer></script>
   <script>
-  (function() {
-    'use strict';
-    if (!('serviceWorker' in navigator)) {
-      console.log('Service worker not supported');
-      return;
-    }
-    navigator.serviceWorker.register('service-worker.js')
-    .then(function(registration) {
-      console.log('Registered at scope:', registration.scope);
-    })
-    .catch(function(error) {
-      console.log('Registration failed:', error);
-    });
-
-  })();
+  // (function() {
+  //   'use strict';
+  //   if (!('serviceWorker' in navigator)) {
+  //     console.log('Service worker not supported');
+  //     return;
+  //   }
+  //   navigator.serviceWorker.register('service-worker.js')
+  //   .then(function(registration) {
+  //     console.log('Registered at scope:', registration.scope);
+  //   })
+  //   .catch(function(error) {
+  //     console.log('Registration failed:', error);
+  //   });
+  //
+  // })();
   </script>
 
 

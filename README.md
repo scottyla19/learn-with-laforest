@@ -18,3 +18,19 @@ fetch(request).then(response => cache.put(request, response));
 - Firebase DB- TIL that firebase saves data locally on all firebase clients [Firebase offline](https://firebase.google.com/docs/database/web/read-and-write#write_data_offline) . I was going to make a fetch then cache fetch event for the firebase databas url but this default functionality seems to work fine for offline.
 
 - Struggling getting firebase messagine working with topics. First was using API key instead of SERVER_KEY which led to 401 responses. And also needed to prepend key= in the request header for the google iid api. Still receiving empty object for response on checking current topics.
+
+- In order to show admin link only to admin (me) I created a child in the firebase db of `isAdmin`. The isAdmin child has children nodes for eadh admin id. I can then check the signed in user's id against the database.
+
+  ```javascript
+  this.database.ref('/isAdmin/').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+          if (childSnapshot.key.replace(/\"/g, "") === userId) {
+            console.log("isAdmin");
+            document.getElementById('showAdmin').removeAttribute("hidden");
+          }
+          else{
+            document.getElementById('showAdmin').setAttribute('hidden', 'true');
+          }
+      });
+  });
+  ```

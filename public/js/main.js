@@ -16,6 +16,21 @@ function Assignment() {
   document.getElementById('showIED').addEventListener('click', this.setCourse.bind(this, "IED"));
   document.getElementById('showCEA').addEventListener('click', this.setCourse.bind(this, "CEA"));
   document.getElementById('show3DDA').addEventListener('click', this.setCourse.bind(this, "3DDA"));
+  // document.getElementById('showAdmin').addEventListener('click', this.showAdmin.bind(this));
+
+  this.signInButton.removeAttribute("hidden");
+  this.signOutButton.addEventListener('click', this.signOut.bind(this));
+  this.signInButton.addEventListener('click', this.signIn.bind(this));
+
+
+  this.signInSnackbar = document.getElementById('must-signin-snackbar');
+
+  this.currentCourse = "Alg1";
+  document.getElementById('showAlg1').addEventListener('click', this.setCourse.bind(this, "Alg1"));
+  document.getElementById('showIED').addEventListener('click', this.setCourse.bind(this, "IED"));
+  document.getElementById('showCEA').addEventListener('click', this.setCourse.bind(this, "CEA"));
+  document.getElementById('show3DDA').addEventListener('click', this.setCourse.bind(this, "3DDA"));
+  document.getElementById('showAdmin').addEventListener('click', this.showAdmin.bind(this));
 
   this.signInButton.removeAttribute("hidden");
   this.signOutButton.addEventListener('click', this.signOut.bind(this));
@@ -28,6 +43,35 @@ Assignment.prototype.setCourse = function(course){
   this.currentCourse = course;
   this.clearAssignments();
   this.loadMessages();
+}
+
+Assignment.prototype.showAdmin = function(){
+  alert("show admin");
+}
+
+Assignment.prototype.clearAssignments = function(){
+  var myNode = document.getElementById("assignments");
+  while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+  }
+}
+// Sets up shortcuts to Firebase features and initiate firebase auth.
+Assignment.prototype.initFirebase = function() {
+    this.auth = firebase.auth();
+    this.database = firebase.database();
+    // this.storage = firebase.storage();
+    // Initiates Firebase auth and listen to auth state changes.
+    this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+  this.initFirebase();
+}
+Assignment.prototype.setCourse = function(course){
+  this.currentCourse = course;
+  this.clearAssignments();
+  this.loadMessages();
+}
+
+Assignment.prototype.showAdmin = function(){
+  alert("show admin");
 }
 
 Assignment.prototype.clearAssignments = function(){
@@ -57,6 +101,19 @@ Assignment.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 Assignment.prototype.onAuthStateChanged = function(user) {
   if (user) { // User is signed in!
+
+      var userId = user.uid;
+      this.database.ref('/isAdmin/').once('value').then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+              if (childSnapshot.key.replace(/\"/g, "") === userId) {
+                document.getElementById('showAdmin').removeAttribute("hidden");
+              }
+              else{
+                document.getElementById('showAdmin').setAttribute('hidden', 'true');
+              }
+          });
+      });
+
       // Get profile pic and user's name from the Firebase user object.
       var profilePicUrl = user.photoURL; // Only change these two lines!
       var userName = user.displayName;   // Only change these two lines!
