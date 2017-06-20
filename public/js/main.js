@@ -233,12 +233,15 @@ Assignment.prototype.loadMessages = function() {
 
   // Loads the last 12 messages and listen for new ones.
   var setMessage = function(data) {
+    console.log(data.key);
     var val = data.val();
     this.displayAssignment( data.key, val.title, val.description, val.dateAssigned, val.dateDue, val.links);
   }.bind(this);
 
-  this.messagesRef.limitToLast(12).on('child_added', setMessage);
-  this.messagesRef.limitToLast(12).on('child_changed', setMessage);
+  this.messagesRef.orderByChild('dateDue').limitToLast(12).on('child_added', setMessage);
+  this.messagesRef.orderByChild('dateDue').limitToLast(12).on('child_changed', setMessage);
+
+
 };
 
 
@@ -273,8 +276,8 @@ Assignment.prototype.displayAssignment = function(key, title, desc, assigned, du
   }
 
   div.querySelector('.title').textContent = title;
-  div.querySelector('.dateAssigned').textContent = "Assigned: "+ this.convertTimestamp(assigned);
-  div.querySelector('.dateDue').textContent = "Due: " + this.convertTimestamp(due);
+  div.querySelector('.dateAssigned').textContent = "Assigned: "+ assigned;
+  div.querySelector('.dateDue').textContent = "Due: " + due;
 
 
   //template for adding checkbox in secondary info
@@ -292,7 +295,7 @@ Assignment.prototype.checkSetup = function() {
 };
 
 Assignment.prototype.convertTimestamp = function(timestamp){
-  var dateDue = new Date(timestamp*1000);
+  var dateDue = new Date(timestamp);
   return  ""+ (dateDue.getMonth()+ 1) + "/" + dateDue.getDate() + "/" + dateDue.getFullYear()
 };
 window.onload = function() {

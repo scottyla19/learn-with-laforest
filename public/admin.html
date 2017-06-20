@@ -65,6 +65,16 @@
       <div id="about-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
           <form action="#">
+            <!--TODO: make course select  -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="course" name="course">
+                <option value="algebra1">Algebra 1</option>
+                <option value="ied">Intro to Engineering Design</option>
+                <option value="cea">Civil Engineering and Architecture</option>
+                <option value="3dda">3D Design</option>
+              </select>
+              <label class="mdl-textfield__label" for="course">Course</label>
+            </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <label for="title">Title</label>
               <input class="mdl-textfield__input" type="text" id="title">
@@ -85,7 +95,7 @@
             </div>
 
           </form>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submitForm">
             Submit
           </button>
         </div>
@@ -100,7 +110,7 @@
   <script src="/__/firebase/4.0.0/firebase-messaging.js"></script>
   <script src="/__/firebase/init.js"></script>
 
-  <script type="text/javascript" src="js/main.js"  defer></script>
+  <script type="text/javascript" src="js/admin.js"  defer></script>
 
 
 
